@@ -3,21 +3,33 @@ package models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Movie {
+
+    int movieId;
     String backdropPath;
     String posterPath;
     String title;
     String overview;
+    String date;
+    double rating;
+
+    public Movie(){
+    }
 
     public Movie(JSONObject jsonObject) throws JSONException {
+        movieId = jsonObject.getInt("id");
         backdropPath = jsonObject.getString("backdrop_path");
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
+        date = jsonObject.getString("release_date");
+        rating = jsonObject.getDouble("vote_average");
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException{
@@ -43,4 +55,10 @@ public class Movie {
     public String getOverview() {
         return overview;
     }
+
+    public String getDate() { return date;}
+
+    public double getRating(){ return rating; }
+
+    public int getMovieId() { return movieId; }
 }
